@@ -23,6 +23,19 @@ console.log(mine);
 
 var richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
 
+function livelloSecondo(prompt){
+    for (var i = 0; i < 84; i++) {
+        var livelloDue = richiestaNumero[i];
+    }
+    return livelloDue;
+}
+function livelloTerzo(prompt){
+    for (var i = 0; i < 50; i++) {
+        var livelloTre = richiestaNumero[i];
+    }
+    return livelloTre;
+}
+
 var verificaNumero = false;
 
 if (!isNaN(richiestaNumero) && richiestaNumero <= 100 && richiestaNumero >= 1) {
@@ -31,6 +44,14 @@ if (!isNaN(richiestaNumero) && richiestaNumero <= 100 && richiestaNumero >= 1) {
 if (verificaNumero){
     while (!mine.includes(richiestaNumero)) {
         richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
+    } console.log('hai perso');
+} else {
+    console.log('inserisci un numero da 1 a 100');
+}
+//livello 2 (oscurare dalla 42 alla 48 e accendere qua sotto)-----------------------------------
+if (verificaNumero){
+    while (!mine.includes(richiestaNumero)) {
+        livelloSecondo;
     } console.log('hai perso');
 } else {
     console.log('inserisci un numero da 1 a 100');
