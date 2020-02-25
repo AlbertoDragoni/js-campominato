@@ -23,18 +23,18 @@ console.log(mine);
 
 var richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
 
-function livelloSecondo(prompt){
-    for (var i = 0; i < 84; i++) {
-        var livelloDue = richiestaNumero[i];
-    }
-    return livelloDue;
-}
-function livelloTerzo(prompt){
-    for (var i = 0; i < 50; i++) {
-        var livelloTre = richiestaNumero[i];
-    }
-    return livelloTre;
-}
+// function livelloSecondo(prompt){
+//     for (var i = 0; i < 84; i++) {
+//         var livelloDue = richiestaNumero[i];
+//     }
+//     return livelloDue;
+// }
+// function livelloTerzo(prompt){
+//     for (var i = 0; i < 50; i++) {
+//         var livelloTre = richiestaNumero[i];
+//     }
+//     return livelloTre;
+// }
 
 var verificaNumero = false;
 
