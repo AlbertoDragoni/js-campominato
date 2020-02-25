@@ -25,14 +25,20 @@ var richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
 
 var verificaNumero = false;
 
-if (!isNaN(richiestaNumero) && richiestaNumero < 100 && richiestaNumero > 1) {
+if (!isNaN(richiestaNumero) && richiestaNumero <= 100 && richiestaNumero >= 1) {
     var verificaNumero = true;
 }
 if (verificaNumero){
     if (mine.includes(richiestaNumero)) {
         console.log('hai perso');
     } else {
-        console.log('hai vinto');
+        console.log('hai vinto, continua');
+        var richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
+        if (mine.includes(richiestaNumero)) {
+            console.log('hai perso');
+        } else {
+            console.log('hai vinto, continua');
+        }
     }
 } else {
     console.log('inserisci un numero da 1 a 100');
