@@ -38,11 +38,8 @@ while (numeriUtente.length < tentativiMax) { // lunghezza
     } else {
         alert ('metti un numero!!!')
     }
-
 }
 // FUNZIONI
-
-
 function sceltaDifficolta(){
     var decidiDifficolta = parseInt(prompt('decidi livello difficoltà: 1, 2 o 3'));
     if (!isNaN(decidiDifficolta)) {
