@@ -6,92 +6,66 @@
 // massimo possibile di numeri consentiti.
 // // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte
 // che l’utente ha inserito un numero consentito.
-var mine = [];
 
-var i = 0;
-while (i < 16) {
-    var numeriCasuali = generaRandom(1,100);
-    mine.push(numeriCasuali);
-    i++;
+var numeriMine = [];
+var numeriUtente = [];
+var mine = 16;
+var dimensioneCampo = sceltaDifficolta();
+var tentativiMax = dimensioneCampo - mine;
+while (numeriMine.length < mine) { //Inserisce 16 mine
+    var numeriRandomMine = generaRandomMinMax(1, dimensioneCampo); // il N RANDOM DENTRO IL CICLO
+    if (!numeriMine.includes(numeriRandomMine)) {
+        numeriMine.push(numeriRandomMine);
+    }
 }
-function generaRandom(min, max) {
-    numeroRandom = Math.floor(Math.random() * (max - min + 1)) + min;
-    return numeroRandom;
-}
-console.log(mine);
-// fino a qua ho generato 16 numeri random, le mine.
-
-// function livelloSecondo(prompt){
-//     for (var i = 0; i < 84; i++) {
-//         var livelloDue = richiestaNumero[i];
-//     }
-//     return livelloDue;
-// }
-// function livelloTerzo(prompt){
-//     for (var i = 0; i < 50; i++) {
-//         var livelloTre = richiestaNumero[i];
-//     }
-//     return livelloTre;
-// }
-
-var dimensioneCampo = sceltaDifficolta(); // scelta con funzione
-var totaleMine = 16;
-var bandierineMax = dimensioneCampo - totaleMine;
-
-var posizioneMine = minaIlCampo(dimensioneCampo, totaleMine);
-console.log(posizioneMine);
-var bandierinePiazzate = [];
-
-var boom = false;
-while ((bandierinePiazzate.length < bandierineMax) && (boom === false)) {
-    var bandierinaDaPiazzare = parseInt(prompt('Scrivi un numeri da 1 a ' + dimensioneCampo));
-    if (!bandierinePiazzate.includes(bandierinaDaPiazzare)) {
-        if (!posizioneMine.includes(bandierinaDaPiazzare)) {
-            bandierinePiazzate.push(bandierinaDaPiazzare);
-            if (bandierinePiazzate.length == bandierineMax) {
-                alert('Vai a giocare al Superenalotto');
+console.log(numeriMine);
+while (numeriUtente.length < tentativiMax) { // lunghezza
+    var inputUtente = parseInt(prompt("inserisci un un numero da 1 a 100"));
+    if (!isNaN(inputUtente)) {
+        if (!numeriUtente.includes(inputUtente)) { // se l'inputUtente non è incluso andiamo avanti
+            if (!numeriMine.includes(inputUtente)) { // se numero untente non è incliso nell'elenco numeri mine allora mine
+                numeriUtente.push(inputUtente);
+                if (numeriUtente === tentativiMax) {
+                    alert('Hai Vinto!')
+                }
             } else {
-                alert('Hai piazzato una bandierina');
+                alert("ESPLODI")
+                break;
             }
         } else {
-            alert('BOOOM!! hai beccato una bomba! Hai piazzato ' + bandierinePiazzate.length + ' bandierine');
-            boom = true;
+            alert("HAI GIA INSERITO IL NUMERO")
         }
     } else {
-        alert('Hai già inserito questo numero');
+        alert ('metti un numero!!!')
     }
-}
 
-function sceltaDifficolta() {
-    var scelta = parseInt(prompt('Inserisci la difficoltà tra 1, 2 o 3'));
-    switch (scelta) {
-        case 1:
-            var dimCampo = 100;
-            break;
-        case 2:
-            var dimCampo = 80;
-            break;
-        case 3:
-            var dimCampo = 50;
-            break;
-        default:
-            var dimCampo = 100;
-    }
-    return dimCampo;
 }
+// FUNZIONI
 
-function minaIlCampo(dimCampo, totMine) {
-    var posizMine = [];
-    while (posizMine.length < totMine) {
-        var minaDaPiazzare = generaRandomMinMax(1, dimCampo);
-        if (!posizMine.includes(minaDaPiazzare)) {
-            posizMine.push(minaDaPiazzare);
+
+function sceltaDifficolta(){
+    var decidiDifficolta = parseInt(prompt('decidi livello difficoltà: 1, 2 o 3'));
+    if (!isNaN(decidiDifficolta)) {
+        switch (decidiDifficolta) {
+            case 1:
+                dimensioneCampo = 100;
+                break;
+            case 2:
+                dimensioneCampo = 80;
+                break;
+            case 3:
+                dimensioneCampo = 17;
+                break;
+            default:
+                dimensioneCampo = 100;
         }
-    }
-    return posizMine;
+    } else {
+        alert ('inserisci un  numero da 1 a 3');
+    } return dimensioneCampo;
 }
 
-function generaRandomMinMax(min, max) { // funzione che genera un numero random tra due valori dati in ingresso MIN e MAX, estremi inclusi
+// funzione che genera un numero random tra due valori dati in ingresso MIN e MAX, estremi inclusi
+function generaRandomMinMax(min, max) {
     var numeroRandom = Math.floor(Math.random() * (max - min + 1)) + min;
     return numeroRandom;
 }
