@@ -21,8 +21,6 @@ function generaRandom(min, max) {
 console.log(mine);
 // fino a qua ho generato 16 numeri random, le mine.
 
-var richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
-
 // function livelloSecondo(prompt){
 //     for (var i = 0; i < 84; i++) {
 //         var livelloDue = richiestaNumero[i];
@@ -36,23 +34,64 @@ var richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
 //     return livelloTre;
 // }
 
-var verificaNumero = false;
+var dimensioneCampo = sceltaDifficolta(); // scelta con funzione
+var totaleMine = 16;
+var bandierineMax = dimensioneCampo - totaleMine;
 
-if (!isNaN(richiestaNumero) && richiestaNumero <= 100 && richiestaNumero >= 1) {
-    var verificaNumero = true;
+var posizioneMine = minaIlCampo(dimensioneCampo, totaleMine);
+console.log(posizioneMine);
+var bandierinePiazzate = [];
+
+var boom = false;
+while ((bandierinePiazzate.length < bandierineMax) && (boom === false)) {
+    var bandierinaDaPiazzare = parseInt(prompt('Scrivi un numeri da 1 a ' + dimensioneCampo));
+    if (!bandierinePiazzate.includes(bandierinaDaPiazzare)) {
+        if (!posizioneMine.includes(bandierinaDaPiazzare)) {
+            bandierinePiazzate.push(bandierinaDaPiazzare);
+            if (bandierinePiazzate.length == bandierineMax) {
+                alert('Vai a giocare al Superenalotto');
+            } else {
+                alert('Hai piazzato una bandierina');
+            }
+        } else {
+            alert('BOOOM!! hai beccato una bomba! Hai piazzato ' + bandierinePiazzate.length + ' bandierine');
+            boom = true;
+        }
+    } else {
+        alert('Hai già inserito questo numero');
+    }
 }
-if (verificaNumero){
-    while (!mine.includes(richiestaNumero)) {
-        richiestaNumero = parseInt(prompt('inserisci un numero da 1 a 100'));
-    } console.log('hai perso');
-} else {
-    console.log('inserisci un numero da 1 a 100');
+
+function sceltaDifficolta() {
+    var scelta = parseInt(prompt('Inserisci la difficoltà tra 1, 2 o 3'));
+    switch (scelta) {
+        case 1:
+            var dimCampo = 100;
+            break;
+        case 2:
+            var dimCampo = 80;
+            break;
+        case 3:
+            var dimCampo = 50;
+            break;
+        default:
+            var dimCampo = 100;
+    }
+    return dimCampo;
 }
-//livello 2 (oscurare dalla 42 alla 48 e accendere qua sotto)-----------------------------------
-if (verificaNumero){
-    while (!mine.includes(richiestaNumero)) {
-        livelloSecondo;
-    } console.log('hai perso');
-} else {
-    console.log('inserisci un numero da 1 a 100');
+
+function minaIlCampo(dimCampo, totMine) {
+    var posizMine = [];
+    while (posizMine.length < totMine) {
+        var minaDaPiazzare = generaRandomMinMax(1, dimCampo);
+        if (!posizMine.includes(minaDaPiazzare)) {
+            posizMine.push(minaDaPiazzare);
+        }
+    }
+    return posizMine;
+}
+
+function generaRandomMinMax(min, max) { // funzione che genera un numero random tra due valori dati in ingresso MIN e MAX, estremi inclusi
+    var numeroRandom = Math.floor(Math.random() * (max - min + 1)) + min;
+    return numeroRandom;
 }
